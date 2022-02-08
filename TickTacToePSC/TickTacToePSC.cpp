@@ -22,8 +22,20 @@ int WinCondition(int t, int s, int u) {
 
 int main()
 {
+    /*
+    The Board
+    a | b | c
+    ---------
+    e | f | g
+    ---------
+    h | i | j
+    */
 
-    int a, b, c, d, e, f, g, h, i = EMPTY;
+
+    int a, b, c, d, e, f, g, h, i = EMPTY; /* Mass initialization */
+    a = b = c = d = e = f = g = h = i; /* Works on ints or any time we pass by VALUE not reference.*/
+
+
 
     int winStatus = 0;
     winStatus = WinCondition(a, e, i);
