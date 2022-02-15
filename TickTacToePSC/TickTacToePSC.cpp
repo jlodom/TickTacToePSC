@@ -8,7 +8,7 @@ const int PX = 1;
 const int PY = 4;
 const int ROW = 3;
 const int MAXMOVES = 9;
-
+const int BOARDSIZE = 3;
 
 // STUB FOR LATER
 void PrintBoard(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j) {
@@ -39,8 +39,29 @@ int IdentifyWinner(int t, int s, int u) {
 }
 
 
-bool WinnerExists(int t, int s, int u) {
+
+bool WinnerExists(int boardcopy[][BOARDSIZE]) {
     bool boolWinnerExists = false;
+
+    
+    for (int i = 0; i < BOARDSIZE; i++) {
+        int columnwin[BOARDSIZE];
+        int rowwin = 0;
+        for (int j = 0; j < BOARDSIZE; j++) {
+            rowwin += boardcopy[i][j];
+            // COLUMN ADD -- THIS IS WRONG. THINK ABOUT IT.
+            // WE ENDED HERE
+            if (i == j) {
+                columnwin[j] += boardcopy[i][j];
+            }
+        }
+        if ((rowwin == PX * BOARDSIZE) || (rowwin == PY * BOARDSIZE)) {
+            boolWinnerExists = true;
+        }
+    }
+
+
+    // IGNORE BELOW THIS RIGHT NOW
     int intWinnerNumber = IdentifyWinner(t, s, u);
     if ((intWinnerNumber == PX) || (intWinnerNumber == PY)) {
         boolWinnerExists = true;
@@ -62,6 +83,12 @@ int main()
     h | i | j
     */
 
+    /* The Array Board 
+    00 | 01 | 02
+    10 | 11 | 12
+    20 | 21 | 22
+    */
+
     /* Win Conditions
     
     a,b,c
@@ -79,8 +106,7 @@ int main()
     int intWinStatus = 0;
     bool boolHaveWinner = false;
     int intMoveTracker = 0;
-    int a, b, c, d, e, f, g, h, i, j = EMPTY; /* Mass initialization */
-    a = b = c = d = e = f = g = h = i = j; /* Works on ints or any time we pass by VALUE not reference.*/
+    int board[BOARDSIZE][BOARDSIZE];
     int playerOne;
     int playerTwo;
     // STUB Write some randomizer code 
